@@ -9,8 +9,15 @@ GandynR
 * Personal learning + rainy day. And to see if it was possible to do this with `R`. And also :
 * Adding small security check. Sort of : try a ssh connection to itself to check new retrieved IP.
 * A bit more minimalistic. Dumber ?
-* More readable output, from my point of view. 
 * If something goes wrong, nothing is done, logs are written in one file.
+* clean readable output, from my point of view :
+
+```{sh}
+randy@rpi ~/gandynR $ cat gandynRLog.txt
+Wed Jul  2 19:40:25 2014:IP not changed. Old:188.62.189.138 New:188.62.189.138
+Wed Jul  2 19:44:45 2014:IP not changed. Old:188.62.189.138 New:188.62.189.138
+Wed Jul  2 19:50:44 2014:IP has changed. Old:188.62.189.138 New:188.62.189.139
+```
 
 ### to do :
 * testing
@@ -32,7 +39,6 @@ biocLite("XMLRPC")
 * Rename `gandynR-config.exemple.R` to `gandynR-config.R` and complete it with these `R` lines :
 
 ```{r}
-library('XMLRPC') # main library. See below if you have to install it
 aKey <- 'yourApiKey03oinr3508fn5hohoho' # your personal gandi api key
 dName <- 'yourDomainName.com' # your domain name
 userId <- 'Randy' # ssh user id

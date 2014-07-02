@@ -15,6 +15,8 @@
 #
 ######################################
 library(methods)
+library(XMLRPC)
+
 # # name of config file to search for
 configFileName='gandynR-config.R'
 
@@ -60,7 +62,7 @@ if('try-error' %in% class(testConfig)){
 #
 ######################################
 
-conOutput <- file(file.path(logDir,'gandynRLog.txt'),open='a')
+conOutput <- file(file.path(logDir,'gandynR-log.txt'),open='a')
 
 sink(conOutput,append=T,type='output')
 sink(conOutput,append=T,type='message')
@@ -123,7 +125,7 @@ stopifnot(!is.null(ipGandi) | !is.null(ipReal))
 #  Update if there is a change
 #
 ######################################
-if(identical(ipGandi,ipReal)){
+if(!identical(ipGandi,ipReal)){
   message(date(),':','IP has changed. Old:',ipGandi,' New:',ipReal)
   
   ######################################
