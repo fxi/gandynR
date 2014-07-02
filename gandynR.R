@@ -48,7 +48,7 @@ if(!file.exists(confFile)){
   stop(paste(confFile,' : File not found'))
 }
 
-testConfig<-try(source(configfile))
+testConfig<-try(source(confFile))
 if('try-error' %in% class(testConfig)){
   stop(paste('Error produced when reading configFile',testConfig))
 }
