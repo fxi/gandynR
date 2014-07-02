@@ -1,76 +1,28 @@
 #!/usr/bin/Rscript
-################################################################################
-#
-#   GandynR:  Automatic DNS update for Gandi.net hosting.
-#               Retrive current public IP of web server and update zone's record.
-#               Written in R. Why not...
-#               With ssh security check. Sort of :
-#                 Need passwordless ssh connection to yourself
-#                 to be sure that new ip is yours.
-#  
-#   2014 f@fxi.io
-#  
-#       Use at your own risk, i've done this for myself because it's a rainy day.
-#       See also for python and/or bash alternative.
-#
-#   Usage :
-#     1. Be sure you can SSH your own server without password. (See Refs below)
-#     2. On your web server: copy this script to the 
-#         location and name of your choice: 
-#         E.g. : ~/gandiDNS/gandynR.R
-#     3. Uncomment and complete default config in this script OR 
-#         write it in external file (See config block):
-#         E.g. : ~/gandiDNS/gandynR-config.R
-#     4. set a cron job to launch that script :
-#         $ chmod +x ~/gandiDNS/gandynR.R
-#         $ crontab -e
-#         Add this line (modify with your username and path)
-#         */5 * * * * /home/randy/gandiDNS/gandynR.R
-# 
-#   NOTES :  execute those line in R console to install XML-RPC package
-#           > source("http://bioconductor.org/biocLite.R") 
-#           > biocLite("XMLRPC")
-#
-# ref : 
-#  -- http://superuser.com/questions/8077/how-do-i-set-up-ssh-so-i-dont-have-to-type-my-password 
-#  -- https://github.com/Chralu/gandyn
-#  -- http://gerard.geekandfree.org/blog/2012/03/01/debarrassez-vous-de-dyndns-en-utilisant-lapi-de-gandi/
-#  -- http://superuser.com/questions/522887/how-can-i-get-my-public-ip-address-from-the-command-line-if-i-am-behind-a-route
-#  -- http://doc.rpc.gandi.net/domain/reference.html#domain.zone.info
-################################################################################
-
 
 
 ######################################
 #
-# Exemple config. Uncomment and/or 
-# copy this block to a file 
-# and set path in source('path/to/config'), below 
+# gandynR : update gandi dns with R..
+# f@fxi.io
+# usage and parameters : see README file
 #
 ######################################
 
-library('XMLRPC')
+######################################
+#
+# Internal configuration. 
+#
+######################################
 
-# # gandi.net api key
-# aKey<-'yourApiKey03oinr3508fn5hohoho'
-
-# # domain name
-# dName<-'yourDomainName.com'
-
-# # user id (for ssh connection)
-# userId = 'RandySmith'
-
-# # ssh port (keep empty for 22)
-# sshPort = 12123
+# # name of config file to search for
+configFileName='gandynR-config.R'
 
 # # retrieve ip on :
 ipMe<-'http://ipecho.net/plain'
 
 # # time to live
 ttlNew=300
-
-# # log directory
-logDir<-'.'
 
 # # gandi xmlrpc end points
 xrc<-'https://rpc.gandi.net/xmlrpc/'
@@ -86,13 +38,21 @@ recordFilter=list(list(type='A',name='@')
 
 ######################################
 #
-# source config. 
-# Comment this line if no config file 
-# are given 
+# source config : first agument given
+#   is the config DIRECTORY path
 #
 ######################################
+confDir <- commandArgs(trailingOnly = TRUE)[1]
+confFile <-path.expand(file.path(confDir,configFileName))
+if(!file.exists(confFile)){
+  stop(paste(confFile,' : File not found'))
+}
 
-source('~/gandiDNS/gandynR-config.R')
+testConfig<-try(source(configfile))
+if('try-error' %in% class(testConfig)){
+  stop(paste('Error produced when reading configFile',testConfig)
+}
+
 
 ######################################
 #
