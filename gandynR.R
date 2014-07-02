@@ -50,7 +50,7 @@ if(!file.exists(confFile)){
 
 testConfig<-try(source(configfile))
 if('try-error' %in% class(testConfig)){
-  stop(paste('Error produced when reading configFile',testConfig)
+  stop(paste('Error produced when reading configFile',testConfig))
 }
 
 
