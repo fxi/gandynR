@@ -10,7 +10,7 @@ GandynR (test version)
 * Adding small security check. Sort of : try a ssh connection to itself to check new retrieved IP.
 * A bit more minimalistic. Dumber ?
 * If something goes wrong, nothing is done, logs are written in one file.
-* Clean readable output, from my point of view :
+* Clean output. 
 
 ```{sh}
 randy@rpi ~/gandynR $ cat gandynR-log.txt
@@ -51,9 +51,12 @@ logDir <- '~/myGandynR/' # directory where to write messages AND outputs.
   * Add this line :
   
 ```{sh}
-*/5 * * * * /usr/bin/Rscript /pathTo/gandynR.R /pathTo/gandynR-config.R
+*/5 * * * * /usr/bin/Rscript /pathTo/gandynR.R /pathTo/configDir/ >/dev/null 2>&1
 ```
-
+  * `>/dev/null 2>&1` part : don't email output. 
+  * Add `MAILTO="randy@email.com"` at the beginning of your crontab if you want a useless mail every 300 seconds.
+  
+  
 ### reference
 1. [ssh passwordless / superuser.com](http://superuser.com/questions/8077/how-do-i-set-up-ssh-so-i-dont-have-to-type-my-password )
 2. [original gandyn script](https://github.com/Chralu/gandyn) 
