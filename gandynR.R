@@ -14,7 +14,7 @@
 # Internal configuration. 
 #
 ######################################
-
+library(methods)
 # # name of config file to search for
 configFileName='gandynR-config.R'
 
