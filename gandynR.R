@@ -60,7 +60,7 @@ if('try-error' %in% class(testConfig)){
 #
 ######################################
 
-conOutput <- file(file.path(logDir,'gandynRLog.txt'))
+conOutput <- file(file.path(logDir,'gandynRLog.txt'),open='a')
 
 sink(conOutput,append=T,type='output')
 sink(conOutput,append=T,type='message')

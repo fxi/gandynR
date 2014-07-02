@@ -39,7 +39,7 @@ userId <- 'Randy' # ssh user id
 sshPort <- '12123' # default ssh port is 22
 logDir <- '~/myGandynR/' # directory where to write messages AND outputs.
 ```
-* try it : /usr/bin/Rscript /pathTo/gandynR.R /pathTo/gandynR-config.R
+* try it : /usr/bin/Rscript /pathTo/gandynR.R /pathTo/configDir/
 * Set a cron action :
   * `crontab -e`
   * Add this line :
