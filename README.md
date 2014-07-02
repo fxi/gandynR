@@ -1,5 +1,5 @@
 
-GandynR
+GandynR (test version)
 =======
 
 ### Automatic DNS update for Gandi.net hosting. With R. And ssh.
@@ -10,13 +10,13 @@ GandynR
 * Adding small security check. Sort of : try a ssh connection to itself to check new retrieved IP.
 * A bit more minimalistic. Dumber ?
 * If something goes wrong, nothing is done, logs are written in one file.
-* clean readable output, from my point of view :
+* Clean readable output, from my point of view :
 
 ```{sh}
-randy@rpi ~/gandynR $ cat gandynRLog.txt
-Wed Jul  2 19:40:25 2014:IP not changed. Old:188.62.189.138 New:188.62.189.138
-Wed Jul  2 19:44:45 2014:IP not changed. Old:188.62.189.138 New:188.62.189.138
-Wed Jul  2 19:50:44 2014:IP has changed. Old:188.62.189.138 New:188.62.189.139
+randy@rpi ~/gandynR $ cat gandynR-log.txt
+Wed Jul  2 19:40:25 2014:IP not changed. Old:101.62.189.138 New:101.62.189.138
+Wed Jul  2 19:44:45 2014:IP not changed. Old:101.62.189.138 New:101.62.189.138
+Wed Jul  2 19:50:44 2014:IP has changed. Old:101.62.189.138 New:101.62.189.139
 ```
 
 ### to do :
@@ -25,7 +25,7 @@ Wed Jul  2 19:50:44 2014:IP has changed. Old:188.62.189.138 New:188.62.189.139
 
 
 ### Prequisites
-* Make a backup of your zones version before using this script.
+* Make a backup of your zone versions before using this script.
 * Be sure you can SSH your own server from itself without password. (See Refs below)
 * Enable XML-RPC interface for your domain on [gandi](https://gandi.net) and get an API key.
 * Install R library `XMLRPC`. In a `R` console :
