@@ -123,7 +123,7 @@ stopifnot(!is.null(ipGandi) | !is.null(ipReal))
 #  Update if there is a change
 #
 ######################################
-if(!identical(ipGandi,ipReal)){
+if(identical(ipGandi,ipReal)){
   message(date(),':','IP has changed. Old:',ipGandi,' New:',ipReal)
   
   ######################################
